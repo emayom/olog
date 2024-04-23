@@ -21,10 +21,15 @@ export const Breadcrumb = ({ homeElement, separator }: TBreadCrumbProps) => {
       ...parts.map((part, index) => {
         const href = `/${parts.slice(0, index + 1).join("/")}`;
 
+        const className =
+          parts.length - 1 === index
+            ? "font-medium text-slate-900 truncate dark:text-slate-200"
+            : "hover:text-slate-400/75";
+
         return (
           <Fragment key={part}>
             {separator}
-            <li>
+            <li className={className}>
               <Link href={href}>{part}</Link>
             </li>
           </Fragment>
@@ -37,7 +42,9 @@ export const Breadcrumb = ({ homeElement, separator }: TBreadCrumbProps) => {
     <>
       {breadcrumbs && (
         <nav>
-          <ol className="flex gap-2 text-slate-500">{breadcrumbs}</ol>
+          <ol className="flex flex-wrap gap-2 text-sm text-slate-500 dark:text-slate-400">
+            {breadcrumbs}
+          </ol>
         </nav>
       )}
     </>
